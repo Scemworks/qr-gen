@@ -6,7 +6,7 @@ const generateButton = document.getElementById("generate");
 const qrContainer = document.getElementById("qr-container");
 const downloadButton = document.getElementById("download");
 const saveLogsButton = document.getElementById("save-logs");
-const errorMessage = document.getElementById("error-message"); // Add an error message element
+const errorMessage = document.getElementById("error-message");
 let logs = [];
 
 // Set the default selection when the page loads
@@ -115,13 +115,6 @@ function generateQRCode(data) {
     }
 }
 
-// Validate image extension
-function isValidImage(file) {
-    const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg'];
-    const fileExtension = file.name.split('.').pop().toLowerCase();
-    return validExtensions.includes('.' + fileExtension);
-}
-
 // Handle the Generate button click
 generateButton.addEventListener("click", () => {
     const choice = choiceSelect.value;
@@ -140,9 +133,10 @@ generateButton.addEventListener("click", () => {
     } else if (choice === "image") {
         const imageFile = document.getElementById("image").files[0];
         if (imageFile) {
-            if (isValidImage(imageFile)) {
+            if (imageFile.type.startsWith("image/")) { // Validate the file type
                 appendToLogs("Uploading image...");
                 uploadImageToImgur(imageFile);
+                errorMessage.style.display = "none"; // Hide error message
             } else {
                 errorMessage.style.display = "block"; // Show error message if file is not an image
                 errorMessage.textContent = "Invalid file type. Please upload an image file (jpg, jpeg, png, gif, bmp, svg).";
