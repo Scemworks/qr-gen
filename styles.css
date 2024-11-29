@@ -7,7 +7,8 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column; /* Allow the footer to stay at the bottom */
-    justify-content: space-between; /* Push content to top and bottom */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
     height: 100vh; /* Full viewport height */
     box-sizing: border-box;
     overflow: hidden; /* Prevent scrolling */
@@ -128,12 +129,14 @@ body {
 /* Footer Styles */
 footer {
     text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.2); /* Match QR container's background */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Similar box-shadow */
+    width: 80%; /* To ensure footer doesn't stretch too wide */
     margin-top: 20px;
-    padding: 10px;
-    background-color: #f1f1f1;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    color: #fff;
+    font-size: 14px;
 }
 
 footer a {
