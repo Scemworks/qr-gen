@@ -1,126 +1,76 @@
-/* Reset and Global Styles */
-* {
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 0 20px;
 }
 
-.container {
+/* QR Generator Container */
+#qr-generator {
     background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 450px;
-    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
     text-align: center;
-    padding: 30px;
-    animation: fadeIn 0.6s ease-out;
 }
 
-h1 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #555;
-    display: block;
-    margin-bottom: 10px;
-}
-
-select, input, button {
+/* Input and Button Styling */
+#qr-generator input,
+#qr-generator select,
+#qr-generator button {
     width: 100%;
-    padding: 12px 15px;
-    font-size: 1rem;
-    margin-bottom: 20px;
-    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
     border: 1px solid #ddd;
-    outline: none;
-    transition: all 0.3s ease;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-select:hover, input:hover, button:hover {
-    border-color: #764ba2;
-}
-
-select:focus, input:focus {
-    box-shadow: 0 0 5px rgba(118, 75, 162, 0.5);
-    border-color: #764ba2;
-}
-
-button {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+/* Generate Button */
+#generate {
+    background-color: #007bff;
     color: white;
     border: none;
-    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background: linear-gradient(135deg, #764ba2, #667eea);
+#generate:hover {
+    background-color: #0056b3;
 }
 
-button:active {
-    transform: scale(0.98);
-}
-
+/* QR Output Section */
 #qr-output {
     margin-top: 20px;
-    display: none;
 }
 
-#qr-container {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background: #f4f4f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+#qr-container canvas {
+    max-width: 100%;
+    margin: 10px 0;
 }
 
-.hidden {
-    display: none;
-}
-
-#download-btn {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #28a745;
+/* Download Button */
+#download {
+    background-color: #28a745;
     color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: background 0.3s ease;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-#download-btn:hover {
-    background: #218838;
+#download:hover {
+    background-color: #218838;
 }
 
-/* Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+#download.hidden {
+    display: none;
 }
