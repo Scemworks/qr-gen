@@ -2,6 +2,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(45deg, #ff7a00, #ff6a00, #e700ff); /* Full background gradient */
+    background-size: 300% 300%; /* Ensure the gradient spans across the screen */
     color: #fff;
     margin: 0;
     padding: 0;
@@ -12,6 +13,20 @@ body {
     height: 100vh; /* Full viewport height */
     box-sizing: border-box;
     overflow: hidden; /* Prevent scrolling */
+    animation: gradientAnimation 6s ease infinite; /* Add animation for the gradient */
+}
+
+/* Gradient Animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* QR Generator Container */
@@ -21,7 +36,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     max-width: 450px;
-    width: 100%; /* Ensure the container adjusts based on screen size */
+    width: 90%; /* Make it more responsive on smaller screens */
     text-align: center;
     backdrop-filter: blur(10px); /* Apply a blur effect to blend better */
     transition: transform 0.3s ease;
@@ -146,4 +161,43 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For small devices like phones */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    /* Adjust QR generator container for smaller screens */
+    #qr-generator {
+        padding: 20px;
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    /* Make inputs and buttons a bit more compact */
+    #qr-generator input,
+    #qr-generator select,
+    #qr-generator button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    footer {
+        width: 90%; /* Allow footer to occupy most of the screen width */
+        font-size: 12px; /* Smaller font size for footer */
+    }
+}
+
+/* For medium devices like tablets */
+@media (max-width: 1024px) {
+    #qr-generator {
+        width: 80%; /* Less width on medium screens */
+    }
+
+    footer {
+        width: 85%; /* A bit larger than on mobile */
+    }
 }
