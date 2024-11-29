@@ -81,11 +81,17 @@ function generateQRCode(data) {
         // Make the download button visible with the generated QR code data
         const qrCanvas = qrContainer.querySelector("canvas");
         if (qrCanvas) {
-            // Set the href of the download button to the QR code image data
-            downloadButton.href = qrCanvas.toDataURL("image/png");  // Ensure the canvas content is used for download
-            downloadButton.download = "qrcode.png";  // Provide a default filename
-            downloadButton.style.display = "inline-block";
-            downloadButton.classList.remove("hidden");
+            // Get the QR code image data as a base64-encoded PNG
+            const qrImageDataUrl = qrCanvas.toDataURL("image/png");
+
+            // Trigger automatic download of the QR code image as 'qr.png'
+            const link = document.createElement("a");
+            link.href = qrImageDataUrl;
+            link.download = "qr.png";  // Save the QR code as qr.png
+            link.click();  // Trigger the download immediately
+
+            // Optionally, show the download button
+            downloadButton.style.display = "none";  // Hide the button if you prefer auto-download
         } else {
             appendToLogs("Error: No canvas found for QR Code.");
         }
