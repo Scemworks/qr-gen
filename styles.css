@@ -8,7 +8,6 @@
 /* Body */
 body {
     font-family: 'Roboto', sans-serif;
-    background: #f8f9fa;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,9 +17,34 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Gradient Background */
+/* Default Gradient Background */
 body {
     background: linear-gradient(to bottom right, #4e54c8, #8f94fb); /* Purple gradient */
+}
+
+/* Android Device Theme */
+body.android {
+    background: linear-gradient(to bottom right, #32CD32, #228B22); /* Green theme */
+}
+
+/* iPhone/iPad Theme */
+body.iphone, body.ipad {
+    background: linear-gradient(to bottom right, #FF1493, #FF69B4); /* Pink theme */
+}
+
+/* Windows Theme */
+body.windows {
+    background: linear-gradient(to bottom right, #00BFFF, #1E90FF); /* Blue theme */
+}
+
+/* Linux Theme */
+body.linux {
+    background: linear-gradient(to bottom right, #FFD700, #FF6347); /* Yellow to Red theme */
+}
+
+/* macOS Theme */
+body.macos {
+    background: linear-gradient(to bottom right, #2F4F4F, #556B2F); /* MacOS-inspired dark green */
 }
 
 /* QR Generator Container (modern theme) */
@@ -92,103 +116,6 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
-}
-
-/* Device-based Themes */
-
-/* Android Device Theme */
-body.android {
-    background: linear-gradient(45deg, #32CD32, #228B22); /* Green theme */
-}
-
-#qr-generator.android {
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 10px 20px rgba(0, 123, 0, 0.3);
-}
-
-button.android {
-    background-color: #32CD32;
-    color: white;
-}
-
-button.android:hover {
-    background-color: #228B22;
-}
-
-/* iPhone/iPad Theme */
-body.iphone, body.ipad {
-    background: linear-gradient(45deg, #FF1493, #FF69B4); /* Pink theme */
-}
-
-#qr-generator.iphone, #qr-generator.ipad {
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
-}
-
-button.iphone, button.ipad {
-    background-color: #FF1493;
-    color: white;
-}
-
-button.iphone:hover, button.ipad:hover {
-    background-color: #FF69B4;
-}
-
-/* Windows Theme */
-body.windows {
-    background: linear-gradient(45deg, #00BFFF, #1E90FF); /* Blue theme */
-}
-
-#qr-generator.windows {
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 10px 30px rgba(30, 144, 255, 0.3);
-}
-
-button.windows {
-    background-color: #00BFFF;
-    color: white;
-}
-
-button.windows:hover {
-    background-color: #1E90FF;
-}
-
-/* Linux Theme */
-body.linux {
-    background: linear-gradient(45deg, #FFD700, #FF6347); /* Yellow to Red theme */
-}
-
-#qr-generator.linux {
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 12px 24px rgba(255, 99, 71, 0.3);
-}
-
-button.linux {
-    background-color: #FFD700;
-    color: white;
-}
-
-button.linux:hover {
-    background-color: #FF6347;
-}
-
-/* macOS Theme */
-body.macos {
-    background: linear-gradient(45deg, #2F4F4F, #556B2F); /* MacOS-inspired dark green */
-}
-
-#qr-generator.macos {
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-}
-
-button.macos {
-    background-color: #2F4F4F;
-    color: white;
-}
-
-button.macos:hover {
-    background-color: #556B2F;
 }
 
 /* Media Queries for Mobile Responsiveness */
