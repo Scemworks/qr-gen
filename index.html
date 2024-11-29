@@ -5,37 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div id="qr-generator">
         <h1>QR Code Generator</h1>
-        <label for="choice">What do you want to encode?</label>
+        <label for="choice">Choose Type:</label>
         <select id="choice">
-            <option value="link">Link or Text</option>
+            <option value="link">Link</option>
             <option value="image">Image</option>
         </select>
         
-        <div id="link-input" class="input-section">
-            <input type="text" id="link" placeholder="Enter URL or Text">
+        <div id="link-input">
+            <input type="text" id="link" placeholder="Enter a link or text">
         </div>
         
-        <div id="image-input" class="input-section hidden">
+        <div id="image-input" style="display: none;">
             <input type="file" id="image" accept="image/*">
         </div>
         
-        <button id="generate-btn">Generate QR Code</button>
+        <button id="generate">Generate QR Code</button>
         
-        <div id="qr-output" class="hidden">
-            <h2>Generated QR Code:</h2>
+        <div id="qr-output" style="display: none;">
             <div id="qr-container"></div>
-            <a id="download-btn" href="#" download="qr_code.png" class="hidden">Download QR Code</a>
+            <button id="download" class="hidden">Download QR Code</button>
         </div>
     </div>
 
-    <!-- QRCode.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
