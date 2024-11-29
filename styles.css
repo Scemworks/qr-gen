@@ -1,7 +1,7 @@
 /* General Styles */
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
     color: #333;
     margin: 0;
     padding: 0;
@@ -9,106 +9,68 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    box-sizing: border-box;
 }
 
 /* QR Generator Container */
-.container {
+#qr-generator {
     background: #ffffff;
-    padding: 25px 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     text-align: center;
-    width: 100%;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
-.container h1 {
-    font-size: 24px;
-    color: #007bff;
-    margin-bottom: 20px;
-}
-
-/* Dropdown, Inputs, and Buttons */
-select,
-input[type="text"],
-input[type="file"],
-button {
+/* Input and Button Styling */
+#qr-generator input,
+#qr-generator select,
+#qr-generator button {
     width: 100%;
-    padding: 12px;
-    margin: 12px 0;
+    margin: 10px 0;
+    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-select:focus,
-input:focus,
-button:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 /* Generate Button */
 #generate {
     background-color: #007bff;
-    color: #ffffff;
-    font-weight: bold;
+    color: white;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
 #generate:hover {
     background-color: #0056b3;
-    transform: scale(1.03);
-}
-
-#generate:active {
-    background-color: #004494;
-    transform: scale(0.98);
 }
 
 /* QR Output Section */
 #qr-output {
     margin-top: 20px;
-    display: none; /* Initially hidden */
 }
 
 #qr-container canvas {
     max-width: 100%;
-    border-radius: 10px;
-    margin: 15px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
 }
 
 /* Download Button */
 #download {
-    display: none; /* Hidden until QR is generated */
     background-color: #28a745;
-    color: #ffffff;
-    font-weight: bold;
+    color: white;
     border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
 #download:hover {
     background-color: #218838;
-    transform: scale(1.03);
 }
 
-#download:active {
-    background-color: #196f3d;
-    transform: scale(0.98);
-}
-
-/* Hidden Class for Download Button */
 #download.hidden {
     display: none;
 }
@@ -116,46 +78,14 @@ button:focus {
 /* Logs Button */
 #save-logs {
     background-color: #ffc107;
-    color: #333;
-    font-weight: bold;
+    color: white;
     border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
+    padding: 10px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
 #save-logs:hover {
     background-color: #e0a800;
-    transform: scale(1.03);
-}
-
-#save-logs:active {
-    background-color: #c69500;
-    transform: scale(0.98);
-}
-
-/* Input Group Styling */
-.input-group {
-    text-align: left;
-    margin: 10px 0;
-}
-
-.input-group label {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 8px;
-    display: block;
-}
-
-/* Keyframe Animation for Fade-In Effect */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
