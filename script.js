@@ -1,4 +1,7 @@
-const imgurClientId = "0135aa7981498f3"; // Replace with your Imgur Client ID
+// Your Imgur Client ID (Only Client ID is needed for anonymous uploads)
+const imgurClientId = "0135aa7981498f3";
+
+// DOM Elements
 const choiceSelect = document.getElementById("choice");
 const linkInput = document.getElementById("link-input");
 const imageInput = document.getElementById("image-input");
@@ -19,19 +22,25 @@ async function uploadToImgur(imageFile) {
     const formData = new FormData();
     formData.append("image", imageFile);
 
-    const response = await fetch("https://api.imgur.com/3/image", {
-        method: "POST",
-        headers: {
-            Authorization: `Client-ID ${imgurClientId}`,
-        },
-        body: formData,
-    });
+    try {
+        const response = await fetch("https://api.imgur.com/3/image", {
+            method: "POST",
+            headers: {
+                Authorization: `Client-ID ${imgurClientId}`,
+            },
+            body: formData,
+        });
 
-    if (response.ok) {
-        const data = await response.json();
-        return data.data.link; // Imgur returns the uploaded image URL
-    } else {
-        throw new Error("Imgur upload failed");
+        if (response.ok) {
+            const data = await response.json();
+            return data.data.link; // The URL of the uploaded image
+        } else {
+            throw new Error("Failed to upload image to Imgur.");
+        }
+    } catch (error) {
+        console.error("Imgur upload error:", error);
+        alert("Error uploading image. Please try again.");
+        throw error;
     }
 }
 
@@ -80,7 +89,7 @@ generateBtn.addEventListener("click", async () => {
             const imgurUrl = await uploadToImgur(imageFile); // Upload image to Imgur
             generateQRCode(imgurUrl); // Generate QR code for the uploaded image URL
         } catch (error) {
-            alert("Failed to upload image. Please try again.");
+            console.error("QR Code generation failed:", error);
         }
     }
 });
