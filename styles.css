@@ -18,6 +18,11 @@ body {
     transition: all 0.3s ease;
 }
 
+/* Gradient Background */
+body {
+    background: linear-gradient(to bottom right, #4e54c8, #8f94fb); /* Purple gradient */
+}
+
 /* QR Generator Container (modern theme) */
 #qr-generator {
     background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
