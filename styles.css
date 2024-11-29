@@ -27,9 +27,37 @@ body.android {
     background: linear-gradient(to bottom right, #32CD32, #228B22); /* Green theme */
 }
 
+#qr-generator.android, footer.android {
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white for QR container */
+    box-shadow: 0 10px 20px rgba(0, 123, 0, 0.3);
+}
+
+button.android {
+    background-color: #32CD32;
+    color: white;
+}
+
+button.android:hover {
+    background-color: #228B22;
+}
+
 /* iPhone/iPad Theme */
 body.iphone, body.ipad {
     background: linear-gradient(to bottom right, #FF1493, #FF69B4); /* Pink theme */
+}
+
+#qr-generator.iphone, footer.iphone {
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white for QR container */
+    box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
+}
+
+button.iphone, button.ipad {
+    background-color: #FF1493;
+    color: white;
+}
+
+button.iphone:hover, button.ipad:hover {
+    background-color: #FF69B4;
 }
 
 /* Windows Theme */
@@ -37,14 +65,56 @@ body.windows {
     background: linear-gradient(to bottom right, #00BFFF, #1E90FF); /* Blue theme */
 }
 
+#qr-generator.windows, footer.windows {
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white for QR container */
+    box-shadow: 0 10px 30px rgba(30, 144, 255, 0.3);
+}
+
+button.windows {
+    background-color: #00BFFF;
+    color: white;
+}
+
+button.windows:hover {
+    background-color: #1E90FF;
+}
+
 /* Linux Theme */
 body.linux {
     background: linear-gradient(to bottom right, #FFD700, #FF6347); /* Yellow to Red theme */
 }
 
+#qr-generator.linux, footer.linux {
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent white for QR container */
+    box-shadow: 0 12px 24px rgba(255, 99, 71, 0.3);
+}
+
+button.linux {
+    background-color: #FFD700;
+    color: white;
+}
+
+button.linux:hover {
+    background-color: #FF6347;
+}
+
 /* macOS Theme */
 body.macos {
     background: linear-gradient(to bottom right, #2F4F4F, #556B2F); /* MacOS-inspired dark green */
+}
+
+#qr-generator.macos, footer.macos {
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white for QR container */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+button.macos {
+    background-color: #2F4F4F;
+    color: white;
+}
+
+button.macos:hover {
+    background-color: #556B2F;
 }
 
 /* QR Generator Container (modern theme) */
