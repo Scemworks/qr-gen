@@ -8,6 +8,13 @@ const downloadButton = document.getElementById("download");
 const saveLogsButton = document.getElementById("save-logs");
 let logs = [];
 
+// Set the default selection when the page loads
+window.onload = () => {
+    choiceSelect.value = "link"; // Set default to 'link'
+    linkInput.style.display = "block"; // Show link input
+    imageInput.style.display = "none"; // Hide image input
+};
+
 // Show appropriate input based on selection (link or image)
 choiceSelect.addEventListener("change", () => {
     if (choiceSelect.value === "link") {
@@ -78,7 +85,7 @@ function generateQRCode(data) {
         });
 
         appendToLogs("QR code generated successfully.");
-        
+
         // Show the download button
         downloadButton.style.display = "block";  // Make the download button visible
 
