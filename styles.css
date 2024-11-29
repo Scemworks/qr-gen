@@ -1,27 +1,23 @@
-/* Global reset */
-* {
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(45deg, #ff7a00, #ff6a00, #e700ff); /* Full background gradient */
+    background-size: 300% 300%; /* Ensure the gradient spans across the screen */
+    color: #fff;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body */
-body {
-    font-family: 'Roboto', sans-serif;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    background: linear-gradient(45deg, #4e54c8, #8f94fb);
-    background-size: 400% 400%; /* Increase the size of the gradient for smoother movement */
-    animation: gradientMove 15s ease infinite; /* Apply the moving animation */
+    flex-direction: column; /* Allow the footer to stay at the bottom */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    height: 100vh; /* Full viewport height */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent scrolling */
+    animation: gradientAnimation 6s ease infinite; /* Add animation for the gradient */
 }
 
-/* Keyframe animation for moving gradient */
-@keyframes gradientMove {
+/* Gradient Animation */
+@keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
     }
@@ -33,70 +29,133 @@ body {
     }
 }
 
-/* QR Generator Container (modern theme) */
+/* QR Generator Container */
 #qr-generator {
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent to blend with the background */
     padding: 30px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     max-width: 450px;
+    width: 90%; /* Make it more responsive on smaller screens */
     text-align: center;
-    margin: 20px 0;
+    backdrop-filter: blur(10px); /* Apply a blur effect to blend better */
     transition: transform 0.3s ease;
 }
 
-/* QR container hover effect */
 #qr-generator:hover {
     transform: scale(1.05);
 }
 
-/* Input and Button styling */
-input, select, button {
+/* Input and Button Styling */
+#qr-generator input,
+#qr-generator select,
+#qr-generator button {
     width: 100%;
-    padding: 14px;
-    margin: 10px 0;
+    margin: 15px 0;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Button */
-button {
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-/* Focus styles */
-input:focus, select:focus, button:focus {
+#qr-generator input:focus,
+#qr-generator select:focus,
+#qr-generator button:focus {
     border-color: #007bff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
 }
 
-/* Footer */
+/* Generate Button */
+#generate {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#generate:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+#generate:active {
+    transform: translateY(2px);
+}
+
+/* QR Output Section */
+#qr-output {
+    margin-top: 25px;
+}
+
+/* QR Code Canvas */
+#qr-container canvas {
+    max-width: 100%;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Download Button */
+#download {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#download:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+#download:active {
+    transform: translateY(2px);
+}
+
+#download.hidden {
+    display: none;
+}
+
+/* Logs Button */
+#save-logs {
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#save-logs:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+}
+
+#save-logs:active {
+    transform: translateY(2px);
+}
+
+/* Footer Styles */
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: rgba(52, 58, 64, 0.7); /* Semi-transparent dark gray */
-    color: white;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    font-size: 12px;
-    transition: background-color 0.3s ease;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.2); /* Match QR container's background */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Similar box-shadow */
+    width: 80%; /* To ensure footer doesn't stretch too wide */
+    margin-top: 20px;
+    color: #fff;
+    font-size: 14px;
 }
 
 footer a {
-    color: #007bff;
+    color: #007BFF;
     text-decoration: none;
 }
 
@@ -104,36 +163,41 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* Media Queries for Mobile Responsiveness */
+/* Media Queries for Responsiveness */
 
 /* For small devices like phones */
 @media (max-width: 600px) {
     body {
-        padding: 15px;
+        padding: 10px;
     }
 
+    /* Adjust QR generator container for smaller screens */
     #qr-generator {
-        width: 100%;
+        padding: 20px;
+        width: 100%; /* Full width for smaller screens */
     }
 
-    button {
-        padding: 14px;
-        font-size: 16px;
+    /* Make inputs and buttons a bit more compact */
+    #qr-generator input,
+    #qr-generator select,
+    #qr-generator button {
+        padding: 10px;
+        font-size: 14px;
     }
 
     footer {
-        font-size: 12px;
+        width: 90%; /* Allow footer to occupy most of the screen width */
+        font-size: 12px; /* Smaller font size for footer */
     }
 }
 
 /* For medium devices like tablets */
 @media (max-width: 1024px) {
     #qr-generator {
-        width: 90%;
+        width: 80%; /* Less width on medium screens */
     }
 
     footer {
-        width: 90%;
-        font-size: 13px;
+        width: 85%; /* A bit larger than on mobile */
     }
 }
