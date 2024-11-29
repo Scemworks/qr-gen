@@ -1,4 +1,4 @@
-// Your Imgur Client ID (Only Client ID is needed for anonymous uploads)
+// Your Imgur Client ID
 const imgurClientId = "0135aa7981498f3";
 
 // DOM Elements
@@ -31,45 +31,58 @@ async function uploadToImgur(imageFile) {
             body: formData,
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            return data.data.link; // The URL of the uploaded image
-        } else {
-            throw new Error("Failed to upload image to Imgur.");
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.data.error);
         }
+
+        const data = await response.json();
+        console.log("Imgur Upload Success:", data.data.link); // Debugging log
+        return data.data.link; // The URL of the uploaded image
     } catch (error) {
         console.error("Imgur upload error:", error);
-        alert("Error uploading image. Please try again.");
+        alert(`Error uploading image: ${error.message}`);
         throw error;
     }
 }
 
 // Generate QR Code
 function generateQRCode(data) {
-    const qr = new QRCode(qrContainer, {
-        text: data,
-        width: 256,
-        height: 256,
-    });
+    // Clear the QR container before rendering
+    qrContainer.innerHTML = "";
 
-    qrOutput.style.display = "block";
-    downloadBtn.classList.remove("hidden");
+    try {
+        const qr = new QRCode(qrContainer, {
+            text: data,
+            width: 256,
+            height: 256,
+        });
 
-    // Enable QR Code Download
-    setTimeout(() => {
-        const canvas = qrContainer.querySelector("canvas");
-        const qrImage = canvas.toDataURL("image/png");
-        downloadBtn.href = qrImage;
-        downloadBtn.download = "qrcode.png";
-    }, 500); // Allow time for QR Code rendering
+        qrOutput.style.display = "block";
+        downloadBtn.classList.remove("hidden");
+
+        // Enable QR Code Download
+        setTimeout(() => {
+            const canvas = qrContainer.querySelector("canvas");
+            if (canvas) {
+                const qrImage = canvas.toDataURL("image/png");
+                downloadBtn.href = qrImage;
+                downloadBtn.download = "qrcode.png";
+            }
+        }, 500); // Allow time for QR Code rendering
+    } catch (error) {
+        console.error("QR Code generation error:", error);
+        alert("Failed to generate QR Code. Please try again.");
+    }
 }
 
 // Generate Button Click Handler
 generateBtn.addEventListener("click", async () => {
     const choice = choiceSelect.value;
-    qrContainer.innerHTML = ""; // Clear the previous QR code
-    qrOutput.style.display = "none"; // Hide output initially
-    downloadBtn.classList.add("hidden"); // Hide download button initially
+
+    // Hide output and download button initially
+    qrOutput.style.display = "none";
+    downloadBtn.classList.add("hidden");
 
     if (choice === "link") {
         const link = document.getElementById("link").value.trim();
