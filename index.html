@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -22,16 +22,20 @@
         </div>
         
         <div id="image-input" class="input-section hidden">
-            <input type="file" id="image">
+            <input type="file" id="image" accept="image/*">
         </div>
         
         <button id="generate-btn">Generate QR Code</button>
-        <div id="qr-output">
+        
+        <div id="qr-output" class="hidden">
             <h2>Generated QR Code:</h2>
             <div id="qr-container"></div>
+            <a id="download-btn" href="#" download="qr_code.png" class="hidden">Download QR Code</a>
         </div>
     </div>
 
+    <!-- QRCode.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
