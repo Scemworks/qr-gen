@@ -7,28 +7,40 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="qr-generator">
+    <div class="container">
         <h1>QR Code Generator</h1>
-        <label for="choice">Choose Type:</label>
+        <p>Select an option to generate a QR code:</p>
+        
+        <!-- Selection Dropdown -->
         <select id="choice">
-            <option value="link">Link</option>
-            <option value="image">Image</option>
+            <option value="link">Generate QR from Link</option>
+            <option value="image">Generate QR from Image</option>
         </select>
-        
-        <div id="link-input">
-            <input type="text" id="link" placeholder="Enter a link or text">
+
+        <!-- Link Input -->
+        <div id="link-input" class="input-group">
+            <label for="link">Enter URL or Text:</label>
+            <input type="text" id="link" placeholder="https://example.com">
         </div>
-        
-        <div id="image-input" style="display: none;">
+
+        <!-- Image Input -->
+        <div id="image-input" class="input-group" style="display: none;">
+            <label for="image">Upload an Image:</label>
             <input type="file" id="image" accept="image/*">
         </div>
-        
+
+        <!-- Generate Button -->
         <button id="generate">Generate QR Code</button>
-        
+
+        <!-- QR Code Output -->
         <div id="qr-output" style="display: none;">
+            <h2>Generated QR Code:</h2>
             <div id="qr-container"></div>
-            <button id="download" class="hidden">Download QR Code</button>
+            <a id="download" class="hidden">Download QR Code</a>
         </div>
+
+        <!-- Save Logs Button -->
+        <button id="save-logs">Download Logs</button>
     </div>
 
     <script src="script.js"></script>
