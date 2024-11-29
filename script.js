@@ -1,138 +1,106 @@
-const imgurClientId = "0135aa7981498f3";
-
-// DOM Elements
+// Initialize variables
 const choiceSelect = document.getElementById("choice");
 const linkInput = document.getElementById("link-input");
 const imageInput = document.getElementById("image-input");
-const generateBtn = document.getElementById("generate");
+const generateButton = document.getElementById("generate");
 const qrContainer = document.getElementById("qr-container");
-const qrOutput = document.getElementById("qr-output");
-const downloadBtn = document.getElementById("download");
+const downloadButton = document.getElementById("download");
+const saveLogsButton = document.getElementById("save-logs");
+let logs = [];
 
-// Logs container (in memory)
-let logs = "";
-
-// Append logs to memory
-function appendToLogs(message) {
-    const timestamp = new Date().toISOString();
-    logs += `[${timestamp}] ${message}\n`;
-}
-
-// Save logs to a file
-function saveLogs() {
-    const blob = new Blob([logs], { type: "text/plain" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "logs.txt";
-    a.click();
-}
-
-// Show/Hide Input Fields Based on Choice
+// Show appropriate input based on selection (link or image)
 choiceSelect.addEventListener("change", () => {
-    const choice = choiceSelect.value;
-    linkInput.style.display = choice === "link" ? "block" : "none";
-    imageInput.style.display = choice === "image" ? "block" : "none";
+    if (choiceSelect.value === "link") {
+        linkInput.style.display = "block";
+        imageInput.style.display = "none";
+    } else {
+        linkInput.style.display = "none";
+        imageInput.style.display = "block";
+    }
 });
 
-// Upload Image to Imgur
-async function uploadToImgur(imageFile) {
-    const formData = new FormData();
-    formData.append("image", imageFile);
-
-    const startTime = performance.now(); // Start timing
-
-    try {
-        const response = await fetch("https://api.imgur.com/3/image", {
-            method: "POST",
-            headers: {
-                Authorization: `Client-ID ${imgurClientId}`,
-            },
-            body: formData,
-        });
-
-        const endTime = performance.now(); // End timing
-        const timeTaken = (endTime - startTime) / 1000;
-        appendToLogs(`Imgur upload time: ${timeTaken} seconds`);
-
-        if (!response.ok) {
-            const error = await response.json();
-            appendToLogs(`Imgur upload failed: ${error.data.error}`);
-            throw new Error(error.data.error);
-        }
-
-        const data = await response.json();
-        appendToLogs(`Imgur upload success: ${data.data.link}`);
-        return data.data.link; // The URL of the uploaded image
-    } catch (error) {
-        console.error("Imgur upload error:", error);
-        appendToLogs(`Error uploading image: ${error.message}`);
-        alert(`Error uploading image: ${error.message}`);
-        throw error;
-    }
+// Log message to console and also store it
+function appendToLogs(message) {
+    const timestamp = new Date().toISOString();
+    const logMessage = `[${timestamp}] ${message}`;
+    console.log(logMessage);
+    logs.push(logMessage);
 }
 
-// Generate QR Code
-function generateQRCode(data) {
-    qrContainer.innerHTML = "";
+// Download logs as a .txt file
+saveLogsButton.addEventListener("click", () => {
+    const logBlob = new Blob(logs, { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(logBlob);
+    link.download = "logs.txt";
+    link.click();
+});
 
+// Upload image to Imgur and get the URL
+function uploadImageToImgur(file) {
+    appendToLogs("Uploading image to Imgur...");
+    const formData = new FormData();
+    formData.append("image", file);
+
+    fetch("https://api.imgur.com/3/upload", {
+        method: "POST",
+        headers: {
+            Authorization: "Client-ID 0135aa7981498f3",  // Replace with your Imgur Client ID
+        },
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const imageUrl = data.data.link;
+            appendToLogs(`Imgur upload success: ${imageUrl}`);
+            generateQRCode(imageUrl); // Generate QR code from Imgur image URL
+        } else {
+            appendToLogs("Imgur upload failed.");
+        }
+    })
+    .catch(error => {
+        appendToLogs(`Error uploading image: ${error}`);
+    });
+}
+
+// Generate QR Code from the data (either link or image URL)
+function generateQRCode(data) {
+    qrContainer.innerHTML = ""; // Clear previous QR codes
     try {
-        const qr = new QRCode(qrContainer, {
+        new QRCode(qrContainer, {
             text: data,
             width: 256,
             height: 256,
         });
-
-        qrOutput.style.display = "block";
-        downloadBtn.classList.remove("hidden");
-
-        setTimeout(() => {
-            const canvas = qrContainer.querySelector("canvas");
-            if (canvas) {
-                const qrImage = canvas.toDataURL("image/png");
-                downloadBtn.href = qrImage;
-                downloadBtn.download = "qrcode.png";
-                appendToLogs("QR code generated successfully.");
-            }
-        }, 500);
+        appendToLogs("QR code generated successfully.");
+        downloadButton.href = qrContainer.querySelector("canvas").toDataURL("image/png");
+        downloadButton.style.display = "inline-block";
+        downloadButton.classList.remove("hidden");
     } catch (error) {
-        console.error("QR Code generation error:", error);
         appendToLogs(`Error generating QR Code: ${error.message}`);
-        alert("Failed to generate QR Code. Please try again.");
     }
 }
 
-// Generate Button Click Handler
-generateBtn.addEventListener("click", async () => {
+// Handle the Generate button click
+generateButton.addEventListener("click", () => {
     const choice = choiceSelect.value;
 
-    qrOutput.style.display = "none";
-    downloadBtn.classList.add("hidden");
-
     if (choice === "link") {
-        const link = document.getElementById("link").value.trim();
-        if (!link) {
-            alert("Please enter a valid URL or text.");
-            return;
+        const link = document.getElementById("link").value;
+        if (link) {
+            appendToLogs("Generating QR code from link...");
+            generateQRCode(link);
+        } else {
+            appendToLogs("Please enter a URL or text.");
         }
-        appendToLogs(`Generating QR code for link: ${link}`);
-        generateQRCode(link);
     } else if (choice === "image") {
         const imageFile = document.getElementById("image").files[0];
-        if (!imageFile) {
-            alert("Please select an image file.");
-            return;
-        }
-
-        try {
-            appendToLogs("Uploading image to Imgur...");
-            const imgurUrl = await uploadToImgur(imageFile); // Upload image to Imgur
-            appendToLogs(`Image URL: ${imgurUrl}`);
-            generateQRCode(imgurUrl); // Generate QR code for the uploaded image URL
-        } catch (error) {
-            appendToLogs("QR Code generation failed.");
+        if (imageFile) {
+            appendToLogs("Uploading image...");
+            uploadImageToImgur(imageFile);
+        } else {
+            appendToLogs("Please select an image file.");
         }
     }
 });
-
-// Save logs when the user wants to download them
-document.getElementById("save-logs").addEventListener("click", saveLogs);
