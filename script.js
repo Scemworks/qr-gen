@@ -70,7 +70,7 @@ function generateQRCode(data) {
     
     try {
         // Create a new QR Code instance
-        new QRCode(qrContainer, {
+        const qrCode = new QRCode(qrContainer, {
             text: data,           // URL or image URL to encode
             width: 256,           // Set the width of the QR Code
             height: 256,          // Set the height of the QR Code
@@ -81,7 +81,9 @@ function generateQRCode(data) {
         // Make the download button visible with the generated QR code data
         const qrCanvas = qrContainer.querySelector("canvas");
         if (qrCanvas) {
-            downloadButton.href = qrCanvas.toDataURL("image/png");
+            // Set the href of the download button to the QR code image data
+            downloadButton.href = qrCanvas.toDataURL("image/png");  // Ensure the canvas content is used for download
+            downloadButton.download = "qrcode.png";  // Provide a default filename
             downloadButton.style.display = "inline-block";
             downloadButton.classList.remove("hidden");
         } else {
