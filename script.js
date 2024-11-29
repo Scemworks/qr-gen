@@ -67,7 +67,7 @@ function uploadImageToImgur(file) {
 // Generate QR Code from the data (either link or image URL)
 function generateQRCode(data) {
     qrContainer.innerHTML = ""; // Clear previous QR codes
-    
+
     try {
         // Create a new QR Code instance
         const qrCode = new QRCode(qrContainer, {
@@ -78,20 +78,23 @@ function generateQRCode(data) {
         });
 
         appendToLogs("QR code generated successfully.");
-        // Make the download button visible with the generated QR code data
+        
+        // Show the download button
+        downloadButton.style.display = "block";  // Make the download button visible
+
+        // Make the QR code image downloadable
         const qrCanvas = qrContainer.querySelector("canvas");
         if (qrCanvas) {
             // Get the QR code image data as a base64-encoded PNG
             const qrImageDataUrl = qrCanvas.toDataURL("image/png");
 
             // Trigger automatic download of the QR code image as 'qr.png'
-            const link = document.createElement("a");
-            link.href = qrImageDataUrl;
-            link.download = "qr.png";  // Save the QR code as qr.png
-            link.click();  // Trigger the download immediately
-
-            // Optionally, show the download button
-            downloadButton.style.display = "none";  // Hide the button if you prefer auto-download
+            downloadButton.addEventListener("click", () => {
+                const link = document.createElement("a");
+                link.href = qrImageDataUrl;
+                link.download = "qr.png";  // Save the QR code as qr.png
+                link.click();  // Trigger the download
+            });
         } else {
             appendToLogs("Error: No canvas found for QR Code.");
         }
