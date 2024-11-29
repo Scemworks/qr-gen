@@ -8,11 +8,34 @@ const downloadButton = document.getElementById("download");
 const saveLogsButton = document.getElementById("save-logs");
 let logs = [];
 
-// Set the default selection when the page loads
+// Device Detection
+function detectDevice() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const body = document.body;
+
+    // Remove any previous device classes
+    body.classList.remove('android', 'iphone', 'ipad', 'windows', 'linux', 'macos');
+
+    // Add appropriate class based on device
+    if (userAgent.includes('android')) {
+        body.classList.add('android');
+    } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+        body.classList.add('iphone');
+    } else if (userAgent.includes('windows')) {
+        body.classList.add('windows');
+    } else if (userAgent.includes('linux')) {
+        body.classList.add('linux');
+    } else if (userAgent.includes('macintosh')) {
+        body.classList.add('macos');
+    }
+}
+
+// Run the device detection when the page loads
 window.onload = () => {
-    choiceSelect.value = "link"; // Set default to 'link'
-    linkInput.style.display = "block"; // Show link input
-    imageInput.style.display = "none"; // Hide image input
+    detectDevice();
+    choiceSelect.value = "link";
+    linkInput.style.display = "block";
+    imageInput.style.display = "none";
 };
 
 // Show appropriate input based on selection (link or image)
@@ -26,7 +49,7 @@ choiceSelect.addEventListener("change", () => {
     }
 });
 
-// Log message to console and also store it
+// Log message to console and store it
 function appendToLogs(message) {
     const timestamp = new Date().toISOString();
     const logMessage = `[${timestamp}] ${message}`;
@@ -76,31 +99,29 @@ function generateQRCode(data) {
     qrContainer.innerHTML = ""; // Clear previous QR codes
 
     try {
-        // Create a new QR Code instance
         const qrCode = new QRCode(qrContainer, {
-            text: data,           // URL or image URL to encode
-            width: 256,           // Set the width of the QR Code
-            height: 256,          // Set the height of the QR Code
-            correctLevel: QRCode.CorrectLevel.H // Set error correction level
+            text: data,
+            width: 256,
+            height: 256,
+            correctLevel: QRCode.CorrectLevel.H // Error correction level
         });
 
         appendToLogs("QR code generated successfully.");
 
         // Show the download button
-        downloadButton.style.display = "block";  // Make the download button visible
+        downloadButton.style.display = "block";
 
         // Make the QR code image downloadable
         const qrCanvas = qrContainer.querySelector("canvas");
         if (qrCanvas) {
-            // Get the QR code image data as a base64-encoded PNG
             const qrImageDataUrl = qrCanvas.toDataURL("image/png");
 
-            // Trigger automatic download of the QR code image as 'qr.png'
+            // Trigger automatic download of the QR code image
             downloadButton.addEventListener("click", () => {
                 const link = document.createElement("a");
                 link.href = qrImageDataUrl;
-                link.download = "qr.png";  // Save the QR code as qr.png
-                link.click();  // Trigger the download
+                link.download = "qr.png";
+                link.click();
             });
         } else {
             appendToLogs("Error: No canvas found for QR Code.");
