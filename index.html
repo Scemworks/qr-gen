@@ -21,7 +21,8 @@
 
         <!-- Image Input -->
         <div id="image-input" style="display: none;">
-            <input type="file" id="image" />
+            <input type="file" id="image" accept="image/*" />
+            <div id="error-message" style="color: red; display: none;">Invalid file type. Please upload an image file (jpg, jpeg, png, gif, bmp, svg).</div>
         </div>
 
         <button id="generate">Generate QR Code</button>
