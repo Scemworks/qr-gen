@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(45deg, #ff7a00, #ff6a00, #e700ff);
+    background: linear-gradient(45deg, #ff7a00, #ff6a00, #e700ff); /* Full background gradient */
     color: #fff;
     margin: 0;
     padding: 0;
