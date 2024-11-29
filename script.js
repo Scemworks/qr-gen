@@ -67,16 +67,26 @@ function uploadImageToImgur(file) {
 // Generate QR Code from the data (either link or image URL)
 function generateQRCode(data) {
     qrContainer.innerHTML = ""; // Clear previous QR codes
+    
     try {
+        // Create a new QR Code instance
         new QRCode(qrContainer, {
-            text: data,
-            width: 256,
-            height: 256,
+            text: data,           // URL or image URL to encode
+            width: 256,           // Set the width of the QR Code
+            height: 256,          // Set the height of the QR Code
+            correctLevel: QRCode.CorrectLevel.H // Set error correction level
         });
+
         appendToLogs("QR code generated successfully.");
-        downloadButton.href = qrContainer.querySelector("canvas").toDataURL("image/png");
-        downloadButton.style.display = "inline-block";
-        downloadButton.classList.remove("hidden");
+        // Make the download button visible with the generated QR code data
+        const qrCanvas = qrContainer.querySelector("canvas");
+        if (qrCanvas) {
+            downloadButton.href = qrCanvas.toDataURL("image/png");
+            downloadButton.style.display = "inline-block";
+            downloadButton.classList.remove("hidden");
+        } else {
+            appendToLogs("Error: No canvas found for QR Code.");
+        }
     } catch (error) {
         appendToLogs(`Error generating QR Code: ${error.message}`);
     }
