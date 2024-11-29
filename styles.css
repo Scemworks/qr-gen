@@ -6,9 +6,9 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column; /* Allow the footer to stay at the bottom */
+    justify-content: space-between; /* Push content to top and bottom */
+    height: 100vh; /* Full viewport height */
     box-sizing: border-box;
     overflow: hidden; /* Prevent scrolling */
 }
