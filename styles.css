@@ -1,133 +1,218 @@
-/* General Styles */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(45deg, #ff7a00, #ff6a00, #e700ff);
-    background-size: 300% 300%;
-    color: #fff;
+/* Global reset */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #f8f9fa;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    box-sizing: border-box;
     overflow: hidden;
-    animation: gradientAnimation 6s ease infinite;
+    transition: all 0.3s ease;
 }
 
-/* Gradient Animation */
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Default styles for all devices */
+/* QR Generator Container (modern theme) */
 #qr-generator {
-    background: rgba(255, 255, 255, 0.2);
+    background: #ffffff;
+    border-radius: 12px;
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    width: 80%;
     max-width: 450px;
-    width: 90%;
     text-align: center;
-    backdrop-filter: blur(10px);
+    margin: 20px 0;
     transition: transform 0.3s ease;
 }
 
+/* QR container hover effect */
 #qr-generator:hover {
     transform: scale(1.05);
 }
 
-/* Android specific styles */
-body.android {
-    background: linear-gradient(45deg, #00bcd4, #ff9800); /* Android-themed gradient */
+/* Input and Button styling */
+input, select, button {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-body.android #qr-generator {
-    background: rgba(255, 255, 255, 0.4); /* Lighter background for Android */
+/* Button */
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-body.android footer {
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Focus styles */
+input:focus, select:focus, button:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #343a40;
+    color: white;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     font-size: 12px;
 }
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
 
-/* iPhone & iPad specific styles */
+/* Device-based Themes */
+
+/* Android Device Theme */
+body.android {
+    background: linear-gradient(45deg, #32CD32, #228B22); /* Green theme */
+}
+
+#qr-generator.android {
+    background: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 123, 0, 0.3);
+}
+
+button.android {
+    background-color: #32CD32;
+    color: white;
+}
+
+button.android:hover {
+    background-color: #228B22;
+}
+
+/* iPhone/iPad Theme */
 body.iphone, body.ipad {
-    background: linear-gradient(45deg, #ff4081, #4caf50); /* iOS-themed gradient */
+    background: linear-gradient(45deg, #FF1493, #FF69B4); /* Pink theme */
 }
 
-body.iphone #qr-generator, body.ipad #qr-generator {
-    padding: 25px;
+#qr-generator.iphone, #qr-generator.ipad {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
 }
 
-body.iphone footer, body.ipad footer {
-    font-size: 13px;
+button.iphone, button.ipad {
+    background-color: #FF1493;
+    color: white;
 }
 
-/* Windows specific styles */
+button.iphone:hover, button.ipad:hover {
+    background-color: #FF69B4;
+}
+
+/* Windows Theme */
 body.windows {
-    background: linear-gradient(45deg, #2196f3, #ffeb3b); /* Windows-themed gradient */
+    background: linear-gradient(45deg, #00BFFF, #1E90FF); /* Blue theme */
 }
 
-body.windows #qr-generator {
-    max-width: 600px;
+#qr-generator.windows {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 10px 30px rgba(30, 144, 255, 0.3);
 }
 
-body.windows footer {
-    font-size: 14px;
+button.windows {
+    background-color: #00BFFF;
+    color: white;
 }
 
-/* Linux specific styles */
+button.windows:hover {
+    background-color: #1E90FF;
+}
+
+/* Linux Theme */
 body.linux {
-    background: linear-gradient(45deg, #607d8b, #ff5722); /* Linux-themed gradient */
+    background: linear-gradient(45deg, #FFD700, #FF6347); /* Yellow to Red theme */
 }
 
-body.linux #qr-generator {
-    max-width: 600px;
+#qr-generator.linux {
+    background: #ffffff;
+    box-shadow: 0 12px 24px rgba(255, 99, 71, 0.3);
 }
 
-body.linux footer {
-    font-size: 14px;
+button.linux {
+    background-color: #FFD700;
+    color: white;
 }
 
-/* macOS specific styles */
+button.linux:hover {
+    background-color: #FF6347;
+}
+
+/* macOS Theme */
 body.macos {
-    background: linear-gradient(45deg, #000000, #ffffff); /* macOS-like theme */
+    background: linear-gradient(45deg, #2F4F4F, #556B2F); /* MacOS-inspired dark green */
 }
 
-body.macos #qr-generator {
-    max-width: 650px;
+#qr-generator.macos {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
-body.macos footer {
-    font-size: 15px;
+button.macos {
+    background-color: #2F4F4F;
+    color: white;
 }
 
-/* Media Queries for Responsiveness */
+button.macos:hover {
+    background-color: #556B2F;
+}
+
+/* Media Queries for Mobile Responsiveness */
+
+/* For small devices like phones */
 @media (max-width: 600px) {
     body {
-        padding: 10px;
+        padding: 15px;
     }
 
     #qr-generator {
-        padding: 20px;
         width: 100%;
     }
 
+    button {
+        padding: 14px;
+        font-size: 16px;
+    }
+
     footer {
-        width: 90%;
         font-size: 12px;
     }
 }
 
+/* For medium devices like tablets */
 @media (max-width: 1024px) {
     #qr-generator {
-        width: 80%;
+        width: 90%;
     }
 
     footer {
-        width: 85%;
+        width: 90%;
+        font-size: 13px;
     }
 }
