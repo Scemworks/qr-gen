@@ -10,16 +10,19 @@ body {
     align-items: center;
     height: 100vh;
     box-sizing: border-box;
+    overflow: hidden; /* Prevent scrolling */
 }
 
 /* QR Generator Container */
 #qr-generator {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent to blend with the background */
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     max-width: 450px;
+    width: 100%; /* Ensure the container adjusts based on screen size */
     text-align: center;
+    backdrop-filter: blur(10px); /* Apply a blur effect to blend better */
     transition: transform 0.3s ease;
 }
 
