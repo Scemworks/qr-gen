@@ -20,7 +20,7 @@ body {
 
 /* QR Generator Container (modern theme) */
 #qr-generator {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
     border-radius: 12px;
     padding: 30px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
@@ -71,17 +71,20 @@ input:focus, select:focus, button:focus {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #343a40;
+    background-color: rgba(52, 58, 64, 0.7); /* Semi-transparent dark gray */
     color: white;
     width: 100%;
     position: absolute;
     bottom: 0;
     font-size: 12px;
+    transition: background-color 0.3s ease;
 }
+
 footer a {
     color: #007bff;
     text-decoration: none;
 }
+
 footer a:hover {
     text-decoration: underline;
 }
@@ -94,7 +97,7 @@ body.android {
 }
 
 #qr-generator.android {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 10px 20px rgba(0, 123, 0, 0.3);
 }
 
@@ -151,7 +154,7 @@ body.linux {
 }
 
 #qr-generator.linux {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 12px 24px rgba(255, 99, 71, 0.3);
 }
 
