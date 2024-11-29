@@ -1,4 +1,4 @@
-const imgurClientId = "YOUR_IMGUR_CLIENT_ID"; // Replace with your Imgur Client ID
+const imgurClientId = "0135aa7981498f3"; // Replace with your Imgur Client ID
 const choiceSelect = document.getElementById("choice");
 const linkInput = document.getElementById("link-input");
 const imageInput = document.getElementById("image-input");
